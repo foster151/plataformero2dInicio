@@ -61,12 +61,20 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\killenemigo.cs" />
     <Compile Include="Assets\Scripts\MovimientoPersonaje.cs" />
+    <Compile Include="Assets\Images\Personaje\PersonajeMovimiento.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\Coin.cs" />
+    <Compile Include="Assets\Images\Enemigo1\Enemigo1.cs" />
+    <Compile Include="Assets\Images\Scripts\CamaraScript.cs" />
     <Compile Include="Assets\Scripts\CrearArchivo.cs" />
     <Compile Include="Assets\Scripts\Portal.cs" />
+    <Compile Include="Assets\Images\Enemigo1\HitEn1.cs" />
     <Compile Include="Assets\Scripts\botonsalirReiniciar.cs" />
+    <Compile Include="Assets\Images\Enemigo2\HitEnemigo.cs" />
+    <Compile Include="Assets\Images\Enemigo1\RangoEnemigo1.cs" />
+    <Compile Include="Assets\Images\Enemigo2\Enemigo2.cs" />
     <Compile Include="Assets\Scripts\Portal2.cs" />
+    <Compile Include="Assets\Images\Enemigo2\RangoEnemigo2.cs" />
     <Compile Include="Assets\Scripts\Botones.cs" />
     <Compile Include="Assets\Scripts\Plataformas.cs" />
     <Compile Include="Assets\Scripts\Enemigo.cs" />

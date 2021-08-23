@@ -19,7 +19,7 @@ public class MovimientoPersonaje : MonoBehaviour
     IEnumerator Busca()
     {
         yield return new WaitForSeconds(3);
-        busca.text = " ";
+        //busca.text = " ";
     }
 
     // Update is called once per frame
