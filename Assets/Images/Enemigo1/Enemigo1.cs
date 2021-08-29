@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class Enemigo1 : MonoBehaviour
 {
-    public int rutina;
-    public float cronometro;
-    public Animator ani;
-    public int direccion;
-    public float speed_walk;
+    Animator ani;
     public float speed_run;
-    public GameObject target;
+    GameObject target;
     public bool atacando;
     public float rango_vision;
     public float rango_ataque;
@@ -45,26 +41,27 @@ public class Enemigo1 : MonoBehaviour
     }
     public void Comportamientos()
     {
-        if (Mathf.Abs(transform.position.x - target.transform.position.x) > rango_vision && !atacando)
+        if (Vector2.Distance(transform.position, target.transform.position) > rango_vision && !atacando)
         {
             ani.SetBool("run", false);
             ani.SetBool("idle", false);
         }
         else
         {
-            if (Mathf.Abs(transform.position.x - target.transform.position.x) > rango_ataque && !atacando)
+            if (Vector2.Distance(transform.position, target.transform.position) > rango_ataque && !atacando)
             {
                 ani.SetBool("idle", true);
                 if (transform.position.x < target.transform.position.x)
                 {
-                    Invoke("InicioAni", 0.3f);
-                    ani.SetBool("boom", false);
+                   Invoke("InicioAni", 0.3f);
+                   ani.SetBool("boom", false);
                 }
                 else
                 {
-                    Invoke("InicioAni2", 0.3f);
-                    ani.SetBool("boom", false);
+                   Invoke("InicioAni2", 0.3f);
+                   ani.SetBool("boom", false);
                 }
+                
             }
             else
             {

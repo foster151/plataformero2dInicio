@@ -4,21 +4,27 @@ using UnityEngine;
 
 public class Enemigo2 : MonoBehaviour
 {
-    public int rutina;
-    public float cronometro;
-    public Animator ani;
-    public int direccion;
+    int rutina;
+    float cronometro;
+    Animator ani;
+    int direccion;
     public float speed_walk;
     public float speed_run;
-    public GameObject target;
+    GameObject target;
     public bool atacando;
-    /// <summary>
-    /// ///////
-    /// </summary>
+    public GameObject Hit;
+    
     public float rango_vision;
+    public float rango_visionY;
     public float rango_ataque;
     public GameObject rango;
-    public GameObject Hit;
+
+    public LayerMask LayerM;
+    public Vector3 v3;
+    public Vector3 v5;
+    private bool Ground=true;
+    public float Distancia;
+
 
     // Start is called before the first frame update
     void Start()
@@ -31,24 +37,34 @@ public class Enemigo2 : MonoBehaviour
     void Update()
     {
         Comportamientos();
+        if (Physics2D.Raycast(transform.position+v5, transform.right, Distancia,LayerM))
+        {
+            Ground =! Ground;
+        }
+        if (Physics2D.Raycast(transform.position + v3,transform.up*-1, Distancia, LayerM))
+        {
+            
+        }
+        else
+        {
+            Ground = !Ground;
+        }
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawRay(transform.position+v5, transform.right * Distancia);
+        Gizmos.DrawRay(transform.position + v3, transform.up * -1 * Distancia);
     }
     public void Final_Ani()
     {
         ani.SetBool("attack", false);
         atacando = false;
-        rango.GetComponent<BoxCollider2D>().enabled = true;
-    }
-    public void ColliderWeaponTrue()
-    {
-        Hit.GetComponent<BoxCollider2D>().enabled = true;
-    }
-    public void ColliderWeaponFalse()
-    {
-        Hit.GetComponent<BoxCollider2D>().enabled = false;
+        rango.GetComponent<RangoEnemigo2>().enabled = true;
     }
     public void Comportamientos()
     {
-        if (Mathf.Abs(transform.position.x-target.transform.position.x)>rango_vision && !atacando)
+        if (Vector2.Distance(transform.position, target.transform.position) > rango_vision && !atacando)
+        //if (Mathf.Abs(transform.position.x-target.transform.position.x)>rango_vision && !atacando)
         {
             ani.SetBool("run", false);
             cronometro += 1 * Time.deltaTime;
@@ -70,12 +86,32 @@ public class Enemigo2 : MonoBehaviour
                     switch (direccion)
                     {
                         case 0:
-                            transform.rotation = Quaternion.Euler(0, 0, 0);
-                            transform.Translate(Vector3.right * speed_walk * Time.deltaTime);
+                            if (Ground)
+                            {
+                                transform.rotation = Quaternion.Euler(0, 0, 0);
+                                transform.Translate(Vector3.right * speed_walk * Time.deltaTime);
+                                v3 = new Vector3(0.9f, 0.0f, 0.0f);
+                            }
+                            else
+                            {
+                                transform.rotation = Quaternion.Euler(0, 180, 0);
+                                transform.Translate(Vector3.right * speed_walk * Time.deltaTime);
+                                v3 = new Vector3(-0.9f, 0.0f, 0.0f);
+                            }
                             break;
                         case 1:
-                            transform.rotation = Quaternion.Euler(0, 180, 0);
-                            transform.Translate(Vector3.right * speed_walk * Time.deltaTime);
+                            if (Ground)
+                            {
+                                transform.rotation = Quaternion.Euler(0, 180, 0);
+                                transform.Translate(Vector3.right * speed_walk * Time.deltaTime);
+                                v3 = new Vector3(-0.9f, 0.0f, 0.0f);
+                            }
+                            else
+                            {
+                                transform.rotation = Quaternion.Euler(0, 0, 0);
+                                transform.Translate(Vector3.right * speed_walk * Time.deltaTime);
+                                v3 = new Vector3(0.9f, 0.0f, 0.0f);
+                            }
                             break;
                     }
                     ani.SetBool("walk", true);
@@ -84,9 +120,10 @@ public class Enemigo2 : MonoBehaviour
         }
         else
         {
-            if (Mathf.Abs(transform.position.x - target.transform.position.x) > rango_ataque && !atacando)
+            if(Vector2.Distance(transform.position,target.transform.position)>rango_ataque && !atacando)
+            //if (Mathf.Abs(transform.position.x - target.transform.position.x) > rango_ataque && !atacando)
             {
-                if (transform.position.x<target.transform.position.x)
+                if (transform.position.x<target.transform.position.x )
                 {
                     ani.SetBool("walk", false);
                     ani.SetBool("run", true);
