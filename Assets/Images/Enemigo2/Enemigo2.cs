@@ -12,7 +12,6 @@ public class Enemigo2 : MonoBehaviour
     public float speed_run;
     GameObject target;
     public bool atacando;
-    public GameObject Hit;
     
     public float rango_vision;
     public float rango_visionY;
@@ -24,15 +23,12 @@ public class Enemigo2 : MonoBehaviour
     public Vector3 v5;
     private bool Ground=true;
     public float Distancia;
-
-
     // Start is called before the first frame update
     void Start()
     {
         ani = GetComponent<Animator>();
         target = GameObject.Find("Player");
     }
-
     // Update is called once per frame
     void Update()
     {

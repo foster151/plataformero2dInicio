@@ -12,14 +12,12 @@ public class Enemigo1 : MonoBehaviour
     public float rango_ataque;
     public GameObject rango;
     public GameObject Hit;
-
     // Start is called before the first frame update
     void Start()
     {
         ani = GetComponent<Animator>();
         target = GameObject.Find("Player");
     }
-
     // Update is called once per frame
     void Update()
     {

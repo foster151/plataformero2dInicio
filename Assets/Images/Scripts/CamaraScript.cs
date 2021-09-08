@@ -7,6 +7,8 @@ public class CamaraScript : MonoBehaviour
     public float duration = 1.5f, magnitud = 1.5f;
     public GameObject Personaje;
     public Vector2 minCamPos, maxCamPos;
+    public Vector2 minCamPos2, maxCamPos2;
+    public Vector2 minCamPos3, maxCamPos3;
     public float smoothTime;
 
     private Vector2 velocity;
@@ -18,6 +20,15 @@ public class CamaraScript : MonoBehaviour
         float posY = Mathf.SmoothDamp(transform.position.y, Personaje.transform.position.y, ref velocity.y, smoothTime);
 
         transform.position = new Vector3(Mathf.Clamp(posX,minCamPos.x,maxCamPos.x), Mathf.Clamp(posY, minCamPos.y, maxCamPos.y), transform.position.z);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            float posX = Mathf.SmoothDamp(transform.position.x, Personaje.transform.position.x, ref velocity.x, smoothTime);
+            float posY = Mathf.SmoothDamp(transform.position.y, Personaje.transform.position.y, ref velocity.y, smoothTime);
+            transform.position = new Vector3(Mathf.Clamp(posX, minCamPos.x, maxCamPos.x), Mathf.Clamp(posY, minCamPos.y, maxCamPos.y), transform.position.z);
+        }
     }
 
     public IEnumerator Shake()

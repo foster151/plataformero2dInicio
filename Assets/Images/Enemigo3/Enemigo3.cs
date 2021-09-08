@@ -19,16 +19,11 @@ public class Enemigo3 : MonoBehaviour
     public LayerMask LayerM;
 
     public Enemigo3Cambio Cambio;
-
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         Flip = GetComponent<SpriteRenderer>();
-    }
-    void Update()
-    {
-        
     }
     private void OnDrawGizmos()
     {
@@ -48,9 +43,8 @@ public class Enemigo3 : MonoBehaviour
                     Speed = -Speed;
                     rb2d.velocity = new Vector2(Speed, rb2d.velocity.y);
                 }
-                if (Speed < 0) Flip.flipX = true;
-                else if (Speed > 0) Flip.flipX = false;
-
+                if (Speed < 0.1f) Flip.flipX = true;
+                else if (Speed > 0.1f) Flip.flipX = false;
                 break;
             case Enemigo3Cambio.Plataformas:
                 if (Ground)
